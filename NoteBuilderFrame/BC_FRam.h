@@ -1,0 +1,65 @@
+#ifndef _FRAM_ADDR_H_
+#define _FRAM_ADDR_H_
+
+
+#define	EB_SIZE	0x8000	// FRAM의 크기 256Kbits = 32Kbytes = 0x8000
+
+// 각 모터의 보정 비율 1500, 1400, 1300, 1200, 1100, 1000, 900, 800, 700, 600, 500, 400까지 400이 하한선
+#define	EB_KICKER_RATE_ADDR		0x0020
+#define	EB_MAIN_RATE_ADDR		0x0030
+#define	EB_STACKER_RATE_ADDR	0x0040
+
+// CIS의 Offset과 Gain
+#define EB_CIS_BRIGHT			0x00F0
+
+#define	EB_CIS_RGB_OFFSET_ADDR	0x0100
+#define	EB_CIS_IR_OFFSET_ADDR	(EB_CIS_RGB_OFFSET_ADDR+IMG_BUF_X+1)
+#define EB_CIS_RGB_GAIN_ADDR	(EB_CIS_IR_OFFSET_ADDR +IMG_BUF_X+1)
+#define	EB_CIS_IR_GAIN_ADDR		(EB_CIS_RGB_GAIN_ADDR  +IMG_BUF_X+1)
+#define EB_CIS_GAIN_END			(EB_CIS_IR_GAIN_ADDR   +IMG_BUF_X+1) // 1C00 + 1B00 = 0x3700
+
+// UVGAIN은 투과와 반사 두 개이다. 2바이트를 사용한다. 첫번째 바이트는 기록되었는지 확인하는 매직 밸류 0xA3이다.
+#define	EB_UV_GAIN_ADDR		EB_CIS_GAIN_END
+#define	EB_UV_GAIN_SIZE		2	// Gain for Transmission and Reflection + 1 mark
+
+#define	EB_UV_MULT_ADDR		(EB_UV_GAIN_ADDR+EB_UV_GAIN_SIZE+1)
+#define	EB_UV_MULT_SIZE		8	// 4 Channel * 2 Method + 1 mark
+
+#define	EB_TAPE_GAIN_ADDR	(EB_UV_MULT_ADDR+EB_UV_MULT_SIZE+1)
+#define	EB_TAPE_GAIN_SIZE	12
+
+#define	EB_TAPE_MULT_ADDR	(EB_TAPE_GAIN_ADDR+EB_TAPE_GAIN_SIZE+1)
+#define	EB_TAPE_MULT_SIZE	12
+
+#define	EB_MG_GAIN_ADDR		(EB_TAPE_MULT_ADDR+EB_TAPE_MULT_SIZE+1)
+#define	EB_MG_GAIN_SIZE		((MG_GAIN_SIZE+1)*8) // 8 speeds * (5 sensors + 1 sign)
+
+#define	EB_IR_BRIGHT_ADDR	(EB_MG_GAIN_ADDR+EB_MG_GAIN_SIZE)
+// 이 영역의 크기는 ISO_CURRENCY_COUNT와 같다.
+#define	EB_IR_BRIGHT_SIZE	ISO_CURRENCY_COUNT
+
+#define	EB_IR_VALUE_ADDR	(EB_IR_BRIGHT_ADDR+EB_IR_BRIGHT_SIZE+1)
+// 이 영역의 크기는 ISO_CURRENCY_COUNT와 같다.
+#define	EB_IR_VALUE_SIZE	ISO_CURRENCY_COUNT
+
+#define	EB_W_VALUE_ADDR		(EB_IR_VALUE_ADDR+EB_IR_VALUE_SIZE+1)
+#define	EB_W_VALUE_SIZE		1
+
+#define	EB_REFX_ADDR		(EB_W_VALUE_ADDR+EB_W_VALUE_ADDR+1)
+#define	EB_REFX_SIZE		2
+
+#define	EB_UV_LO_ADDR	(EB_REFX_ADDR+EB_REFX_SIZE+1)
+#define	EB_UV_LO_SIZE	8
+
+#define	EB_UV_HI_ADDR	(EB_UV_LO_ADDR+EB_UV_LO_SIZE+1)
+#define	EB_UV_HI_SIZE	8
+
+#define	EB_UV_OFFSET_ADDR	(EB_UV_HI_ADDR+EB_UV_HI_SIZE+1)
+#define	EB_UV_OFFSET_SIZE	8
+// FRAM에 FPGA에 넣어줄 IR용 Divider를 저장한다. dschae 20120806
+#define	EB_IR_DIVIDE_ADDR	(EB_UV_OFFSET_ADDR+EB_UV_OFFSET_SIZE+1)
+#define	EB_IR_DIVIDE_SIZE	1
+
+#endif  /* _FRAM_ADDR_H_ */
+
+

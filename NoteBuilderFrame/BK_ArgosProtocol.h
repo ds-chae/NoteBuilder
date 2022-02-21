@@ -1,0 +1,43 @@
+#ifndef _ARGOSPROTOCOL_H_
+#define _ARGOSPROTOCOL_H_
+
+
+//#define OS_STATE_BUF		2
+//#define OS_ON				0
+//#define OS_OFF				1
+
+#define M_CMD_IDLE			0x1000
+#define M_CMD_ACT			0x2000
+
+#define M_CMD_SET_TDSGAIN	0x4000
+#define M_CMD_SET_TDSPARAM	0x5000
+#define M_CMD_GET_TDS_OFFSET 0x6000
+#define	M_CMD_GET_TDS_GAIN	0x7000
+#define	M_CMD_SET_MGGAIN	0x8000
+#define	M_CMD_SET_UVGAIN	0x9000
+#define	M_CMD_SET_UVOFFSET	0xA000
+
+#define	TDS_PARAM_DUMP		0x0100
+#define TDS_PARAM_ADJGAIN	0x0200
+#define	TDS_PARAM_TEST		0x0300
+#define TDS_PARAM_VCHUNK	0x0400
+#define	TDS_PARAM_ENABLE	0x0500
+#define TDS_PARAM_ECHO		0x0600
+#define TDS_PARAM_ADJOFFSET	0x0700
+#define	M_CMD_SET_TDS_OFFSET	0x0800
+
+#define S_CMD_OK			0x4000
+#define S_CMD_WAIT			0x5000
+
+#define S_CMD_ER_UV			0x6000
+#define S_CMD_ER_MG			0x7000
+#define S_CMD_ER_TDS		0x8000
+#define S_CMD_ER_NOTHING	0x9000
+#define	S_CMD_ER_DOUBLE		0xA000
+
+#endif
+
+
+
+
+

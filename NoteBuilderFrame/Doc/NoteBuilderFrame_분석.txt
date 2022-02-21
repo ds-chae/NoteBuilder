@@ -1,0 +1,26 @@
+ .\libs\libtiffd.lib
+ST150Image
+pImgST150
+
+
+RecognizeCurrency
+
+CICUMANView
+TreeView_GetItem
+DrawMainImage
+
+Main_Enc_isr <- Act_Seq <- FResult
+
+* Call DSP DLL Function
+1. ICUMANView.cpp, int CICUMANView::SetPathName(TCHAR* path) 함수에서 호출
+현재 _CIS_Analysis, _CIS_Verify, _CIS_Result 이 세 함수만 호출한고 있다.
+_CIS_Result함수는 DDLv만 체크하고 있고
+_CIS_Verfiy - > _Denom 함수 호출
+_CIS_Verify ->  _Value
+		_NumtoDenom
+		_IRExtract
+		_Fitness
+
+* TestProjectTestDLL
+
+EUR_FImageMaking 함수 호출 후 EUR_SSDImageMaking 함수 호출
